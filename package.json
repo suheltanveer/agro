@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint js/**/*.js webpack.config.js",
     "build": "webpack",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dashboard -- webpack-dev-server",
     "watch": "npm run build -- --watch",
     "start": "NODE_ENV=server nodemon server.js"
   },
@@ -42,10 +42,14 @@
     "eslint-plugin-promise": "^3.4.2",
     "eslint-plugin-react": "^6.10.0",
     "eslint-plugin-standard": "^2.0.1",
+    "extract-text-webpack-plugin": "2.0.0-beta.5",
     "json-loader": "0.5.4",
     "nodemon": "^1.11.0",
+    "standard": "^8.6.0",
+    "standard-loader": "^5.0.0",
     "style-loader": "0.13.1",
     "webpack": "^2.2.1",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "^2.3.0"
   },
   "repository": {

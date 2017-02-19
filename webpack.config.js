@@ -1,10 +1,10 @@
 const path = require('path')
-// const webpack = require('webpack')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   context: __dirname,
-  entry: './js/ClientApp.js',
-  // devtool: 'cheap-module-source-map',
+  entry: './src/ClientApp.js',
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
@@ -35,22 +35,21 @@ module.exports = {
         loader: 'json-loader'
       },
       {
-        include: path.resolve(__dirname, 'js'),
+        include: path.resolve(__dirname, 'src'),
         test: /\.js$/,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              url: false
-            }
-          }
-        ]
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: "css-loader?modules,localIdentName='[name]-[local]-[hash:base64:6]'"
+        })
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin('style.css'),
+    new DashboardPlugin()
+  ]
 }

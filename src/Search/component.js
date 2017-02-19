@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ShowCard from './ShowCard'
-import Header from './Header'
+import ShowCard from '../ShowCard/component'
+import Header from '../Header/component'
 const { arrayOf, shape, string } = React.PropTypes
 
 const Search = React.createClass({

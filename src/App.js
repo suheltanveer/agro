@@ -17,13 +17,13 @@ const App = () => {
         <Match
           exactly
           pattern='/'
-          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./Landing')} />}
+          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./Homepage/component')} />}
         />
         <Match
           pattern='/search'
           component={(props) => <AsyncRoute
             props={Object.assign({shows: preload.shows}, props)}
-            loadingPromise={System.import('./Search')}
+            loadingPromise={System.import('./Search/component')}
           />}
         />
         <Match
@@ -32,7 +32,7 @@ const App = () => {
             const shows = preload.shows.filter((show) => props.params.id === show.imdbID)
             return <AsyncRoute
               props={Object.assign({show: shows[0]}, props)}
-              loadingPromise={System.import('./Details')}
+              loadingPromise={System.import('./Details/component')}
             />
           }}
         />
