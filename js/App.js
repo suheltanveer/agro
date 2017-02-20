@@ -8,8 +8,6 @@ if (global) {
   global.System = { import () {} }
 }
 
-const { object } = React.PropTypes
-
 const App = () => {
   return (
     <Provider store={store}>
@@ -17,13 +15,13 @@ const App = () => {
         <Match
           exactly
           pattern='/'
-          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./Homepage/component')} />}
+          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./Landing')} />}
         />
         <Match
           pattern='/search'
           component={(props) => <AsyncRoute
             props={Object.assign({shows: preload.shows}, props)}
-            loadingPromise={System.import('./Search/component')}
+            loadingPromise={System.import('./Search')}
           />}
         />
         <Match
@@ -32,17 +30,13 @@ const App = () => {
             const shows = preload.shows.filter((show) => props.params.id === show.imdbID)
             return <AsyncRoute
               props={Object.assign({show: shows[0]}, props)}
-              loadingPromise={System.import('./Details/component')}
+              loadingPromise={System.import('./Details')}
             />
           }}
         />
       </div>
     </Provider>
   )
-}
-
-App.propTypes = {
-  params: object
 }
 
 export default App

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { setSearchTerm } from '../Header/actionCreators'
+import { setSearchTerm } from './actionCreators'
 const { string, func, object } = React.PropTypes
 
 const Landing = React.createClass({
@@ -22,7 +22,7 @@ const Landing = React.createClass({
   render () {
     return (
       <div className='landing'>
-        <h1>Agriplex</h1>
+        <h1>svideo</h1>
         <form onSubmit={this.handleSearchSubmit}>
           <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
         </form>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getOMDBDetails } from './actionCreators'
-import Header from '../Header/component'
+import Header from './Header'
 const { shape, string, func } = React.PropTypes
 
 const Details = React.createClass({

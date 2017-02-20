@@ -1,10 +1,10 @@
 const path = require('path')
-const DashboardPlugin = require('webpack-dashboard/plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
-  entry: './src/ClientApp.js',
+  entry: './js/ClientApp.js',
+  // devtool: 'cheap-module-source-map',
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
@@ -15,7 +15,11 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json'],
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
   },
   stats: {
     colors: true,
@@ -35,21 +39,25 @@ module.exports = {
         loader: 'json-loader'
       },
       {
-        include: path.resolve(__dirname, 'src'),
+        include: [
+          path.resolve(__dirname, 'js'),
+          path.resolve('node_modules/preact-compat/src')
+        ],
         test: /\.js$/,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: "css-loader?modules,localIdentName='[name]-[local]-[hash:base64:6]'"
-        })
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false
+            }
+          }
+        ]
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin('style.css'),
-    new DashboardPlugin()
-  ]
+  }
 }
