@@ -1,25 +1,33 @@
 const path = require('path')
-const webpack = require('webpack')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+// const webpack = require('webpack')
 
 module.exports = {
-  context: __dirname,
-  entry: './js/ClientApp.js',
-  // devtool: 'cheap-module-source-map',
+  entry: [
+    './app/ClientApp.js'
+  ],
   output: {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
     publicPath: '/public/'
   },
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+    ignored: /node_modules/
+  },
+  devtool: 'cheap-module-source-map',
   devServer: {
     publicPath: '/public/',
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.js', '.json'],
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
+    extensions: ['.js', '.json', '.scss', '.sass']
+    // alias: {
+    //   react: 'preact-compat',
+    //   'react-dom': 'preact-compat'
+    // }
   },
   stats: {
     colors: true,
@@ -40,7 +48,7 @@ module.exports = {
       },
       {
         include: [
-          path.resolve(__dirname, 'js'),
+          path.resolve(__dirname, 'app'),
           path.resolve('node_modules/preact-compat/src')
         ],
         test: /\.js$/,
@@ -50,14 +58,34 @@ module.exports = {
         test: /\.css$/,
         use: [
           'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
               url: false
             }
-          }
+          },
+          'sass-loader'
         ]
+      },
+      {
+        test: /\.(ico|png|jpg|gif|svg|eot|ttf|woff|woff2)(\?.+)?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 50000
+          }
+        }
       }
     ]
-  }
+  },
+  plugins: [
+    new DashboardPlugin()
+  ]
 }

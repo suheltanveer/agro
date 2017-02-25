@@ -15,7 +15,7 @@ const App = () => {
         <Match
           exactly
           pattern='/'
-          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./Landing')} />}
+          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./home/HomePage')} />}
         />
         <Match
           pattern='/search'
@@ -37,6 +37,13 @@ const App = () => {
       </div>
     </Provider>
   )
+}
+
+const { shape, string } = React.PropTypes
+App.propTypes = {
+  params: shape({
+    id: string
+  })
 }
 
 export default App

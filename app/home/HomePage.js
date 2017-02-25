@@ -1,10 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { setSearchTerm } from './actionCreators'
+import { setSearchTerm } from '../actionCreators'
+import './HomePage.scss'
+import Header from '../common/Header/Header'
+import Slick from '../common/Slick/Slick'
+
 const { string, func, object } = React.PropTypes
 
-const Landing = React.createClass({
+const HomePage = React.createClass({
   contextTypes: {
     router: object
   },
@@ -21,12 +25,16 @@ const Landing = React.createClass({
   },
   render () {
     return (
-      <div className='landing'>
-        <h1>svideo</h1>
-        <form onSubmit={this.handleSearchSubmit}>
-          <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
-        </form>
-        <Link to='/search'>or Browse All</Link>
+      <div className='HomePage'>
+        <Header showSearch />
+        <div className='container'>
+          <Slick />
+          <h1>HomePage</h1>
+          <form onSubmit={this.handleSearchSubmit}>
+            <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
+          </form>
+          <Link to='/search'>or Browse All</Link>
+        </div>
       </div>
     )
   }
@@ -46,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing)
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
