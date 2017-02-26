@@ -1,7 +1,14 @@
 .HomePage {
-  // background-color: peru;
 
-  h1 {
-    // color: green;
+  .homeContent {
+    margin: 1.5rem auto;
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .slick-slider {
+      // max-height: 40rem;
+    }
   }
 }

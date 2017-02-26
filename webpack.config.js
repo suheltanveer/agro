@@ -1,27 +1,31 @@
 const path = require('path')
-const DashboardPlugin = require('webpack-dashboard/plugin')
+// const DashboardPlugin = require('webpack-dashboard/plugin')
 // const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const extractCSS = new ExtractTextPlugin('dist/[name].css')
+const extractSCSS = new ExtractTextPlugin('dist/[name].scss')
 
 module.exports = {
   entry: [
     './app/ClientApp.js'
   ],
   output: {
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/dist/'
   },
-  watch: true,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000,
-    ignored: /node_modules/
-  },
-  devtool: 'cheap-module-source-map',
-  devServer: {
-    publicPath: '/public/',
-    historyApiFallback: true
-  },
+  // watch: true,
+  // watchOptions: {
+  //   aggregateTimeout: 300,
+  //   poll: 1000,
+  //   ignored: /node_modules/
+  // },
+  // devtool: 'cheap-module-source-map',
+  // devServer: {
+  //   publicPath: '/public/',
+  //   historyApiFallback: true
+  // },
   resolve: {
     extensions: ['.js', '.json', '.scss', '.sass']
     // alias: {
@@ -40,19 +44,19 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: '/node_modules/'
       },
       {
         test: /\.json$/,
         loader: 'json-loader'
       },
       {
-        include: [
-          path.resolve(__dirname, 'app'),
-          path.resolve('node_modules/preact-compat/src')
-        ],
         test: /\.js$/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        include: [
+          path.resolve(__dirname, 'app')
+          // path.resolve('node_modules/preact-compat/src')
+        ]
       },
       {
         test: /\.css$/,
@@ -74,18 +78,24 @@ module.exports = {
           'sass-loader'
         ]
       },
-      {
-        test: /\.(ico|png|jpg|gif|svg|eot|ttf|woff|woff2)(\?.+)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 50000
-          }
-        }
+      { test: /\.(png|gif|woff|woff2|eot|ttf|svg)$/,
+        // loader: 'url-loader?limit=100000'
+        loader: 'url-loader'
       }
+      // {
+      //   test: /\.(ico|png|jpg|gif|svg|eot|ttf|woff|woff2)(\?.+)?$/,
+      //   use: {
+      //     loader: 'url-loader',
+      //     options: {
+      //       limit: 50000
+      //     }
+      //   }
+      // }
     ]
   },
   plugins: [
-    new DashboardPlugin()
+    // new DashboardPlugin()
+    extractCSS,
+    extractSCSS
   ]
 }

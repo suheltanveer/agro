@@ -27,13 +27,15 @@ const HomePage = React.createClass({
     return (
       <div className='HomePage'>
         <Header showSearch />
-        <div className='container'>
-          <Slick />
-          <h1>HomePage</h1>
-          <form onSubmit={this.handleSearchSubmit}>
-            <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
-          </form>
-          <Link to='/search'>or Browse All</Link>
+        <div className='homeContent'>
+          <div className='container'>
+            <Slick />
+            <h1>HomePage one</h1>
+            <form onSubmit={this.handleSearchSubmit}>
+              <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
+            </form>
+            <Link to='/search'>or Browse All</Link>
+          </div>
         </div>
       </div>
     )

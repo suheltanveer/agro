@@ -14,6 +14,7 @@ const App = require('./app/App').default
 
 const server = express()
 
+server.use('/dist', express.static('./dist'))
 server.use('/public', express.static('./public'))
 
 server.use((req, res) => {
