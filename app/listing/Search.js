@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ShowCard from './ShowCard'
-import Header from './Header'
+import ShowCard from '../ShowCard'
+import Header from '../common/Header/Header'
 const { arrayOf, shape, string } = React.PropTypes
 
 const Search = React.createClass({
@@ -13,6 +13,7 @@ const Search = React.createClass({
     searchTerm: string
   },
   render () {
+    console.log('search--->', this.props)
     return (
       <div className='search'>
         <Header showSearch />

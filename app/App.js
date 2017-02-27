@@ -3,7 +3,8 @@ import { Match } from 'react-router'
 import { Provider } from 'react-redux'
 import store from './store'
 import AsyncRoute from './AsyncRoute'
-// import preload from '../public/data.json'
+import preload from '../public/data.json'
+import categoriesData from '../public/categories.json'
 if (global) {
   global.System = { import () {} }
 }
@@ -15,13 +16,16 @@ const App = () => {
         <Match
           exactly
           pattern='/'
-          component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./home/HomePage')} />}
+          component={(props) => <AsyncRoute
+            props={Object.assign({categories: categoriesData.categories}, props)}
+            loadingPromise={System.import('./home/HomePage')}
+          />}
         />
-        {/* <Match
+        <Match
           pattern='/search'
           component={(props) => <AsyncRoute
             props={Object.assign({shows: preload.shows}, props)}
-            loadingPromise={System.import('./Search')}
+            loadingPromise={System.import('./listing/Search')}
           />}
         />
         <Match
@@ -33,7 +37,7 @@ const App = () => {
               loadingPromise={System.import('./Details')}
             />
           }}
-        /> */}
+        />
       </div>
     </Provider>
   )

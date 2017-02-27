@@ -4,9 +4,10 @@ import { Link } from 'react-router'
 import { setSearchTerm } from '../actionCreators'
 import './HomePage.scss'
 import Header from '../common/Header/Header'
-import Slick from '../common/Slick/Slick'
+import BannerSlider from '../common/BannerSlider/BannerSlider'
+import Categories from '../common/Categories/Categories'
 
-const { string, func, object } = React.PropTypes
+const { string, func, object, array } = React.PropTypes
 
 const HomePage = React.createClass({
   contextTypes: {
@@ -14,7 +15,8 @@ const HomePage = React.createClass({
   },
   propTypes: {
     searchTerm: string,
-    dispatchSetSearchTerm: func
+    dispatchSetSearchTerm: func,
+    categories: array
   },
   handleSearchTermChange (event) {
     this.props.dispatchSetSearchTerm(event.target.value)
@@ -29,8 +31,10 @@ const HomePage = React.createClass({
         <Header showSearch />
         <div className='homeContent'>
           <div className='container'>
-            <Slick />
-            <h1>HomePage one</h1>
+            <div className='mainSlider'>
+              <BannerSlider />
+            </div>
+            <Categories categories={this.props.categories} />
             <form onSubmit={this.handleSearchSubmit}>
               <input onChange={this.handleSearchTermChange} value={this.props.searchTerm} type='text' placeholder='Search' />
             </form>

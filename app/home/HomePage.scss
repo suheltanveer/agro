@@ -4,11 +4,23 @@
     margin: 1.5rem auto;
 
     .container {
-      padding: 0 1rem;
+      // padding: 0 1rem;
     }
 
-    .slick-slider {
-      // max-height: 40rem;
+    .mainSlider {
+      .slick-slider {
+        margin-bottom: 3rem;
+      }
+
+      .slick-slide {
+        max-height: 30rem;
+      }
+
+      .slick-slide img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
     }
   }
 }
